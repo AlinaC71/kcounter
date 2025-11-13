@@ -25,6 +25,16 @@ h2 {
   width: fit-content;
 }
 
+/* Row buttons group */
+.row-buttons {
+  margin-bottom: 20px; /* space below row controls */
+}
+
+/* Voice buttons group */
+.voice-buttons {
+  margin-top: 20px; /* ensures they sit clearly underneath */
+}
+
 /* Buttons */
 button {
   padding: 10px 20px;
@@ -45,3 +55,4 @@ button:hover {
 button:active {
   background: #5a3570;
 }
+
