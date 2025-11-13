@@ -1,15 +1,14 @@
-/* Page background and font */
+/* General layout */
 body {
   font-family: Arial, sans-serif;
-  background: #fdf6f0; /* soft cream */
+  background: #fdf6f0;
   text-align: center;
-  margin: 0;
   padding: 20px;
 }
 
 /* Title */
 h2 {
-  color: #7b4b94; /* yarn purple */
+  color: #7b4b94;
   margin-bottom: 20px;
 }
 
@@ -20,12 +19,27 @@ h2 {
   margin: 20px auto;
   padding: 15px;
   background: #fffaf5;
-  border: 3px dashed #d4a5a5; /* stitch-like border */
+  border: 3px dashed #d4a5a5;
   border-radius: 12px;
   width: fit-content;
 }
 
-/* Buttons */
+/* Row buttons group */
+.row-buttons {
+  margin: 15px 0;
+}
+
+/* Voice buttons group */
+.voice-buttons {
+  margin-top: 30px;
+  padding: 15px;
+  background: #f0e6f6;
+  border: 2px solid #d4a5a5;
+  border-radius: 12px;
+  display: inline-block;
+}
+
+/* Base button styling */
 button {
   padding: 10px 20px;
   margin: 8px;
@@ -44,4 +58,21 @@ button:hover {
 
 button:active {
   background: #5a3570;
+}
+
+/* Voice control overrides */
+.start-btn {
+  background: #4CAF50; /* green */
+}
+
+.start-btn:hover {
+  background: #45a049;
+}
+
+.stop-btn {
+  background: #e53935; /* red */
+}
+
+.stop-btn:hover {
+  background: #c62828;
 }
