@@ -1,90 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8">
-  <title>Knitting Row Counter</title>
   <link rel="stylesheet" href="style.css">
+  <title>Knitting Row Counter - Continuous Voice</title>
 </head>
 <body>
   <h2>Knitting Row Counter</h2>
   <p id="rowDisplay">Row: 0</p>
-
-  <!-- Row counter buttons -->
-  <div class="row-buttons">
-    <button onclick="nextRow()">Next Row</button>
-    <button onclick="backRow()">Back</button>
-    <button onclick="resetCounter()">Reset</button>
-  </div>
-
-  <!-- Voice control buttons -->
-  <div class="voice-buttons">
-    <button class="start-btn" onclick="startListening()">🎤 Start Voice Control</button>
-    <button class="stop-btn" onclick="stopListening()">🛑 Stop Voice Control</button>
-  </div>
+  <button onclick="nextRow()">Next Row</button>
+  <button onclick="backRow()">Back</button>
+  <button onclick="resetCounter()">Reset</button>
+  <button onclick="startListening()">🎤 Start Voice Control</button>
+  <button onclick="stopListening()">🛑 Stop Voice Control</button>
 
   <script>
     let row = 0;
+    let recognition;
 
     function updateDisplay() {
-      document.getElementById("rowDisplay").textContent = "Row: " + row;
+      document.getElementById("rowDisplay").innerText = "Row: " + row;
+    }
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      speechSynthesis.speak(utterance);
     }
 
     function nextRow() {
       row++;
       updateDisplay();
+      speak("Row " + row + " started");
     }
 
     function backRow() {
       if (row > 0) row--;
       updateDisplay();
+      speak("Back to row " + row);
     }
 
     function resetCounter() {
       row = 0;
       updateDisplay();
+      speak("Counter reset to row zero");
     }
 
-    // Voice control setup
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    const recognition = SpeechRecognition ? new SpeechRecognition() : null;
+    function startListening() {
+      recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+      recognition.lang = "en-GB";
+      recognition.continuous = true; // keeps listening
+      recognition.onresult = function(event) {
+        const command = event.results[event.results.length - 1][0].transcript.toLowerCase();
+        if (command.includes("next")) nextRow();
+        else if (command.includes("back")) backRow();
+        else if (command.includes("reset")) resetCounter();
+      };
+      recognition.start();
+      speak("Voice control started");
+    }
 
-    if (recognition) {
-      recognition.lang = 'en-GB';
-      recognition.interimResults = true;
-      recognition.maxAlternatives = 1;
-
-      let keepListening = false;
-
-      function startListening() {
-        keepListening = true;
-        try { recognition.start(); } catch (e) {}
-      }
-
-      function stopListening() {
-        keepListening = false;
+    function stopListening() {
+      if (recognition) {
         recognition.stop();
+        speak("Voice control stopped");
       }
-
-      recognition.onend = () => {
-        if (keepListening) {
-          setTimeout(() => { try { recognition.start(); } catch (e) {} }, 200);
-        }
-      };
-
-      recognition.onresult = (event) => {
-        const transcript = Array.from(event.results)
-          .map(r => r[0].transcript)
-          .join(' ')
-          .toLowerCase();
-
-        if (transcript.includes("next")) nextRow();
-        if (transcript.includes("back")) backRow();
-        if (transcript.includes("reset")) resetCounter();
-      };
-    } else {
-      function startListening() { alert("Speech recognition not supported."); }
-      function stopListening() { alert("Speech recognition not supported."); }
     }
   </script>
 </body>
 </html>
+
+
