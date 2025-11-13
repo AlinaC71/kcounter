@@ -1,0 +1,47 @@
+/* Page background and font */
+body {
+  font-family: Arial, sans-serif;
+  background: #fdf6f0; /* soft cream */
+  text-align: center;
+  margin: 0;
+  padding: 20px;
+}
+
+/* Title */
+h2 {
+  color: #7b4b94; /* yarn purple */
+  margin-bottom: 20px;
+}
+
+/* Counter display */
+#rowDisplay {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 20px auto;
+  padding: 15px;
+  background: #fffaf5;
+  border: 3px dashed #d4a5a5; /* stitch-like border */
+  border-radius: 12px;
+  width: fit-content;
+}
+
+/* Buttons */
+button {
+  padding: 10px 20px;
+  margin: 8px;
+  border-radius: 20px;
+  border: none;
+  background: #7b4b94;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #9c6bb5;
+}
+
+button:active {
+  background: #5a3570;
+}
