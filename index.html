@@ -8,11 +8,15 @@
 <body>
   <h2>Knitting Row Counter</h2>
   <p id="rowDisplay">Row: 0</p>
-  <button onclick="nextRow()">Next Row</button>
-  <button onclick="backRow()">Back</button>
-  <button onclick="resetCounter()">Reset</button>
-  <button onclick="startListening()">🎤 Start Voice Control</button>
-  <button onclick="stopListening()">🛑 Stop Voice Control</button>
+  <div class="row-buttons">
+    <button onclick="nextRow()">Next Row</button>
+    <button onclick="backRow()">Back</button>
+    <button onclick="resetCounter()">Reset</button>
+  </div>
+  <div class="voice-buttons"
+    <button onclick="startListening()">🎤 Start Voice Control</button>
+    <button onclick="stopListening()">🛑 Stop Voice Control</button>
+  </div>
 
   <script>
     let row = 0;
@@ -68,5 +72,6 @@
   </script>
 </body>
 </html>
+
 
 
