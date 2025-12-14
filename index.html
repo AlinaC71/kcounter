@@ -38,15 +38,15 @@
     }
 
     function backRow() {
-      if (row > 0) row--;
+      if (row > 1) row--;
       updateDisplay();
       speak("Back to row " + row);
     }
 
     function resetCounter() {
-      row = 0;
+      row = 1;
       updateDisplay();
-      speak("Counter reset to row zero");
+      speak("Counter reset to row one");
     }
 
     function startListening() {
@@ -72,6 +72,7 @@
   </script>
 </body>
 </html>
+
 
 
 
